@@ -1,0 +1,29 @@
+# Name of Workflow
+name: Lint Workflow
+on:
+    # Trigger the workflow on pull request,
+    pull_request:
+        branches:
+        - main
+        - dev
+jobs:
+    # Name of the job
+    test:
+        # Type of runner
+        runs-on: ubuntu-latest
+        steps:
+            # Checkout the repository
+            # uses: actions/checkout@v2 is also available
+            - uses: actions/checkout@v1
+            # install NodeJS
+            - name: Install NodeJS 12.x
+              uses: actions/setup-node@v1
+              with:
+                node-version: '12.x'
+            # Install dependencies
+            - name: Install dependencies
+              run: npm install
+            # Run linting
+            - name: Run linting
+              run: npm run lint
+
